@@ -1,20 +1,16 @@
 package com.project.surpluspowermarket.service;
 
-import com.project.surpluspowermarket.entity.UserEntity;
+import com.project.surpluspowermarket.entity.UserVO;
 import com.project.surpluspowermarket.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -23,11 +19,11 @@ public class UserService {
 
     private static Logger log = LoggerFactory.getLogger(UserService.class);
 
-    public boolean insert(UserEntity userEntity, MultipartFile multiPartPhoto, HttpServletRequest requestFromController) {
+    public boolean insert(UserVO userVO, MultipartFile multiPartPhoto, HttpServletRequest requestFromController) {
         boolean result = false;
         try {
-            userRepository.insert(userEntity);
-            uploadPhotoIntoResources(userEntity.getId(),multiPartPhoto,requestFromController);
+            userRepository.insert(userVO);
+            uploadPhotoIntoResources(userVO.getId(),multiPartPhoto,requestFromController);
             result = true;
         } catch(Exception e) {
             log.info("몽고 DB에 유저 정보를 저장하는 데 실패!");
@@ -35,11 +31,11 @@ public class UserService {
         return result;
     }
 
-    public boolean update(UserEntity userEntity, MultipartFile multiPartPhoto, HttpServletRequest requestFromController) {
+    public boolean update(UserVO userVO, MultipartFile multiPartPhoto, HttpServletRequest requestFromController) {
         boolean result = false;
         try {
-            userRepository.save(userEntity);
-            uploadPhotoIntoResources(userEntity.getId(),multiPartPhoto,requestFromController);
+            userRepository.save(userVO);
+            uploadPhotoIntoResources(userVO.getId(),multiPartPhoto,requestFromController);
             result = true;
         } catch (Exception e) {
             log.info("몽고 DB에 유저 정보 업데이트에 실패!");

@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "UserDataCollection")
-public class UserEntity {
+public class UserVO {
     @Id
     private String id;
     private String password;
