@@ -1,11 +1,16 @@
 package com.project.surpluspowermarket.service;
 
-import com.project.surpluspowermarket.entity.UserVO;
+import com.project.surpluspowermarket.VO.UserVO;
 import com.project.surpluspowermarket.repository.LoginRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class LoginService {
@@ -13,23 +18,15 @@ public class LoginService {
     LoginRepository loginRepository;
 
     Logger log = LoggerFactory.getLogger(LoginService.class);
-    private String exceptionMsg = "";
 
-    public UserVO loginCheck(String userid, String password) {
-        UserVO userVO = null;
-        try {
-            userVO = loginRepository.findById(userid).get();
-            if(!userVO.getPassword().equals(password)) {
-                userVO = null;
-            }
-        } catch (NullPointerException npe) {
-            exceptionMsg = "NullPointerException";
-            log.info("해당 아이디를 찾을 수 없음!");
-        }
-        return userVO;
+    public Map<String,String> loginCheck(String id, String password
+                                        , String saveId, HttpSession session
+                                        , HttpServletResponse response) {
+        Map<String,String> map = new HashMap<>();
+        String msg = "";
+        String viewName = "";
+
+        UserVO
     }
 
-    public String getExceptionMsg() {
-        return exceptionMsg;
-    }
 }

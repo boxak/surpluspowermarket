@@ -1,6 +1,6 @@
 package com.project.surpluspowermarket.service;
 
-import com.project.surpluspowermarket.entity.UserVO;
+import com.project.surpluspowermarket.VO.UserVO;
 import com.project.surpluspowermarket.repository.FindRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
